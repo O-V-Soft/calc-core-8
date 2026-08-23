@@ -3,7 +3,9 @@
 module tb;
 
     reg clk;
-    cpu dut(clk);
+    reg rst; 
+
+    cpu dut(clk, rst); 
 
     initial begin
         clk = 0;
@@ -11,6 +13,10 @@ module tb;
     end
 
     initial begin
+        rst = 1;
+        #10;
+        rst = 0;
+
         dut.ROM[0] = 8'h40;
         dut.ROM[1] = 8'h4F; 
         dut.ROM[2] = 8'hB0;   

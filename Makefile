@@ -31,12 +31,6 @@ test:
 	make run
 	make wave
 
-clean:
-	rm -f $(OUTPUT) $(VCD_FILE)
-
-cpp:
-	verilator -Wall -Wno-fatal --cc src/cpu.v --top-module cpu
-
 re:
 	make clean
 	make all
