@@ -2,10 +2,12 @@ COMPILER = iverilog
 SIMULATOR = vvp
 VIEWER = gtkwave
 
-SRC = src/cpu.v
+SRC = src/cpu.v src/ram.v src/top.v
 TESTBENCH = sim/tb.v
 OUTPUT = sim/design.vvp
 VCD_FILE = sim/simulation.vcd
+
+.PHONY: all compile run wave clean push test re
 
 all: compile run
 
@@ -23,14 +25,9 @@ clean:
 
 push:
 	git add .
-	git commit -m "CalcCore-8"
-	git push origin main --force
+	git commit -m "Calc-Core-8"
+	git push origin main
 
-test:
-	make compile
-	make run
-	make wave
+test: compile run wave
 
-re:
-	make clean
-	make all
+re: clean all

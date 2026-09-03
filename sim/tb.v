@@ -5,7 +5,10 @@ module tb;
     reg clk;
     reg rst; 
 
-    cpu dut(clk, rst); 
+    top dut (
+        .clk(clk),
+        .rst(rst)
+    ); 
 
     initial begin
         clk = 0;
@@ -17,23 +20,28 @@ module tb;
         #10;
         rst = 0;
 
-        dut.ROM[0] = 8'h40;
-        dut.ROM[1] = 8'h4F; 
-        dut.ROM[2] = 8'hB0;   
-        dut.ROM[3] = 8'h00;   
+        dut.cpu_inst.ROM[0] = 8'h40; 
+        dut.cpu_inst.ROM[1] = 8'h4F; 
+        dut.cpu_inst.ROM[2] = 8'hB0; 
+        dut.cpu_inst.ROM[3] = 8'h00;   
 
-        dut.ROM[4] = 8'h40; 
-        dut.ROM[5] = 8'h4B;  
-        dut.ROM[6] = 8'hB0;   
-        dut.ROM[7] = 8'h01;   
+        dut.cpu_inst.ROM[4] = 8'h40; 
+        dut.cpu_inst.ROM[5] = 8'h4B;  
+        dut.cpu_inst.ROM[6] = 8'hB0; 
+        dut.cpu_inst.ROM[7] = 8'h01;   
 
-        dut.ROM[8] = 8'hD0;   
-        dut.ROM[9] = 8'h08;   
+        dut.cpu_inst.ROM[8] = 8'hD0; 
+        dut.cpu_inst.ROM[9] = 8'h08;   
 
         $dumpfile("sim/simulation.vcd");
         $dumpvars(0, tb);
 
-        #500 $finish;
+        #500;
+        
+        $display("RAM[0] = %c (0x%h)", dut.ram_inst.memory[0], dut.ram_inst.memory[0]);
+        $display("RAM[1] = %c (0x%h)", dut.ram_inst.memory[1], dut.ram_inst.memory[1]);
+
+        $finish;
     end
 
 endmodule
