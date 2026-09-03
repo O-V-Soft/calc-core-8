@@ -25,8 +25,8 @@ clean:
 
 push:
 	git add .
-	git commit -m "Calc-Core-8"
-	git push origin main
+	-git commit -m "Calc-Core-8"
+	git push origin main --force
 
 test: compile run wave
 
